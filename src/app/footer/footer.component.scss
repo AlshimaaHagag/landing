@@ -1,0 +1,26 @@
+.icon {
+  text-decoration: none;
+}
+
+.icon.github i {
+  color: #333;
+}
+
+.icon.facebook i {
+  color: #3b5998;
+}
+
+.icon.linkedin i {
+  color: #0077b5;
+}
+
+.icon.twitter i {
+  color: #1da1f2;
+}
+
+
+.icon i:hover {
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+

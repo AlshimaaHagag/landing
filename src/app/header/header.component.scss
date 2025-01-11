@@ -1,0 +1,41 @@
+
+#carouselExample {
+  height: 500px; /* ارتفاع محدد للكاروسيل */
+  overflow: hidden; /* إخفاء الأجزاء الزائدة */
+
+}
+
+.carousel-inner {
+  height: 100%; /* اجعل العناصر الداخلية تملأ الكاروسيل */
+}
+
+.carousel-item img {
+  height: 100%; /* يجعل الصورة تملأ المساحة المتاحة */
+  width: 100%; /* اجعل الصورة تغطي العرض بالكامل */
+  object-fit: cover; /* يجعل الصورة تبدو كـ "كفر" */
+}
+
+.carousel-caption {
+  position: absolute;
+  top: 10%; /* نصف ارتفاع الصورة */
+  left: 50%; /* نصف عرض الصورة */
+  transform: translatex(-50%); /* توسيط النصوص */
+  //background: rgba(0, 0, 0, 0.5); /* خلفية شفافة */
+  color: #fff; /* لون النص */
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.carousel-caption h5 {
+  font-size: 28px;
+  font-weight: bold;
+ margin-top: 10px;
+  color: black;
+}
+
+.carousel-caption p {
+  font-size: 20px;
+  margin-top: 5px;
+  color: black;
+}

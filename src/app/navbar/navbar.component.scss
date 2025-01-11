@@ -1,0 +1,21 @@
+.navbar {
+  position: fixed; /* لجعل navbar ثابت فوق الصفحة */
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.2); /* شفافية لخلفية navbar */
+  z-index: 1000; /* تأكد من أن navbar يظهر فوق جميع العناصر الأخرى */
+  padding: 10px 0;
+
+}
+
+.navbar a {
+  color: white;
+}
+
+.navbar-toggler-icon {
+  color: white;
+}
+.navbar a.dropdown-item{
+  color: black;
+}

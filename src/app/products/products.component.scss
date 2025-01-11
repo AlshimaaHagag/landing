@@ -1,0 +1,87 @@
+.card {
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-25px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card-body {
+  padding: 15px;
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.card-text {
+  font-size: 0.9rem;
+}
+
+.btn-outline-primary:hover {
+  background-color: #007bff;
+  color: white;
+
+}
+
+.btn-outline-success:hover {
+  background-color: #28a745;
+  color: white;
+}
+
+
+h1 {
+  margin-bottom: 20px; /* Reduce space below the heading */
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+
+  .pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+
+    .page-item {
+      margin: 0 5px;
+
+      .pagination-btn {
+        background-color: #f8f9fa; /* لون الخلفية */
+        color: #495057; /* لون النص */
+        border: 1px solid #ced4da; /* الإطار */
+        padding: 8px 15px;
+        border-radius: 30px; /* حواف دائرية */
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background-color: #007bff; /* لون الخلفية عند التمرير */
+          color: white; /* لون النص عند التمرير */
+          border-color: #007bff;
+        }
+
+        &:disabled {
+          background-color: #e9ecef; /* لون للخيار المعطل */
+          color: #adb5bd;
+          border-color: #ddd;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+}
+.search {
+  margin-top: 50px;
+  margin-right: 100px;
+}

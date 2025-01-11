@@ -1,0 +1,111 @@
+
+<!--
+-->
+
+<!--
+<div class="category-filter">
+  <label for="categories">Categories:</label>
+  <select id="categories" (change)="onCategorySelect($event)">
+    <option value="">Select Category</option>
+    <option *ngFor="let category of allCategories" [value]="category.id">{{ category.name }}</option>
+  </select>
+</div>
+
+<div class="subcategory-filter" *ngIf="selectedCategory">
+  <label for="subcategories">Subcategories:</label>
+  <select id="subcategories" (change)="onSubcategorySelect($event)">
+    <option value="">Select Subcategory</option>
+    <option *ngFor="let subcategory of allSubcategories[categoryId]" [value]="subcategory.id">
+      {{ subcategory.name }}
+    </option>
+  </select>
+</div>
+-->
+
+
+  <div class="mt-5" style="position: relative; background-color: #fff8e1;  background-size: cover; background-position: center; min-height: 100vh; color: #333;">
+  <!-- Overlay -->
+  <div  style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(255, 255, 255, 0.9); z-index: 1;"></div>
+
+  <div  style="position: relative; z-index: 2;">
+    <!-- العنوان الرئيسي -->
+    <h1  style="font-size: 3rem; color: #444; text-align: left; margin: 20px 50px 40px; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); padding-bottom: 10px;">
+      Discover Our Products
+    </h1>
+
+<div class="mt-4"  style="display: flex; justify-content: center; position: absolute; top: 1%; left: 70%; transform: translate(-50%); width: 100%; max-width: 400px;">
+  <label class="mt-o" for="searchInput" style="align-self: center; font-size: 1.2rem; margin-right: 10px; color: #444;">Discover:</label>
+  <div  style="position: relative; width: 100%;">
+    <input  id="searchInput" (keyup)="searchProducts(search.value)" #search class="form-control" type="search" placeholder="Search" aria-label="Search" style="width: 100%; border-radius: 30px; padding-left: 35px;">
+    <i  class="fas fa-search" style="position: absolute; top: 50%; left: 10px; transform: translateY(-50%); color: #888;"></i>
+  </div>
+</div>
+
+<!--<div class="search">
+  <h1 class="text-center m-auto p-2 bg-white text-black w-25  " >Discover Our Products</h1>
+</div>
+-->
+
+   @if (products.length > 0) {
+     <div class="container mt-4">
+       <div class="row justify-content-center">
+         @for (product of products; track product._id) {
+           <div class="card col-md-3 col-sm-6 col-12 m-3 p-0 shadow-lg" style="border-radius: 15px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s;">
+             <div style="height: 200px; background-color: #ececec; display: flex; justify-content: center; align-items: center;">
+               <img [src]="product.cover" [alt]="product.name" style="max-height: 100%; max-width: 100%; object-fit: contain;">
+             </div>
+             <div class="card-body text-center">
+               <h5 class="card-title text-truncate font-weight-bold">{{ product.name }}</h5>
+               <p class="card-text text-muted" style="font-size: 0.9rem;">{{ product.description | description:30 }}...</p>
+               <p class="card-text"><strong>Price:</strong> {{ product.price | currency:'EUR' }}</p>
+               <p class="card-text text-warning"><strong>{{ product.rateAvg | number:'1.1-1' }} ★</strong> - Count {{ product.rating }}</p>
+               <div class="d-flex justify-content-center mt-3">
+                 <a [routerLink]="['/products', product._id]" class="btn btn-outline-primary mx-1">See More</a>
+                 <button (click)="addToCart(product._id)" class="btn btn-outline-success mx-1">Add to Cart</button>
+               </div>
+             </div>
+           </div>
+         }
+       </div>
+     </div>
+   } @else {
+     <h2>products not found try again later </h2>
+   }
+
+
+
+<!--pagination-->
+
+      <div class="pagination-container m-auto mt-5 w-25">
+      <ul class="pagination">
+        <li class="page-item">
+          <button (click)="changePage(1)" class="pagination-btn">First</button>
+        </li>
+
+        @if(pagination.prev){
+          <li class="page-item">
+            <button (click)="changePage(pagination.prev)" class="pagination-btn">
+              {{ pagination.prev }}</button>
+
+        </li>
+        }
+        <li class="page-item">
+          <button disabled class="pagination-btn">
+            {{ pagination.currentPage }}
+          </button>
+        </li>
+
+        @if(pagination.next){
+          <li class="page-item">
+          <button (click)="changePage(pagination.next)" class="pagination-btn">
+            {{ pagination.next }}
+          </button>
+        </li>
+        }
+        <li class="page-item">
+          <button (click)="changePage(pagination.totalPages!)" class="pagination-btn">Last</button>
+        </li>
+      </ul>
+      </div>
+  </div>
+</div>
