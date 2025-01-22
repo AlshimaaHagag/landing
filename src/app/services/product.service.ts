@@ -14,22 +14,6 @@ export interface Product  {
     image: string;
 
 }
-  export interface ApiResponse {
-    data: Category[] | null;
-  }
-
-
-export interface Category {
-    id: number;
-    name: string;
-    subcategories:Subcategory[];
-}
-export interface Subcategory {
-  id: number;
-  name: string;
-  categoryId: number;
-  categoryName: string;
-}
 
 
 @Injectable({
@@ -42,10 +26,11 @@ private  readonly  productsRoute: string = '/api/v1/products';
 private  readonly categoryRoute: string = '/api/v1/categories';
 private  readonly subcategoryRoute: string = '/api/v1/subcategories';
 
-  constructor(private apisService:ApisService , private http: HttpClient) {
+  constructor(private apisService: ApisService , private http: HttpClient) {
     this.apiUrl = apisService.apiUrl;
     this.productsRoute =  apisService.productsRoute;
    this.categoryRoute=  apisService.categoryRoute;
+   this.subcategoryRoute =  apisService.subcategoryRoute;
 }
 
 
@@ -59,19 +44,6 @@ private  readonly subcategoryRoute: string = '/api/v1/subcategories';
 
   }
 
-  getAllCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>(`${this.apiUrl}${this.categoryRoute}`, { withCredentials: true });
-  }
-
-//
-  getSubcategoriesByCategoryId(categoryId: string): Observable<Subcategory[]> {
-    return this.http.get<Subcategory[]>(`${this.apiUrl}${this.subcategoryRoute}?categoryId=${categoryId}`, { withCredentials: true });
-  }
-
-//
-  getProductsBySubcategory(subcategoryId: string, page: number = 1, limit: number = 20): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.apiUrl}${this.productsRoute}?subcategoryId=${subcategoryId}&page=${page}&limit=${limit}`, { withCredentials: true });
-  }
 
 
   addProductToCart(productId:string): Observable<Product> {

@@ -1,8 +1,8 @@
  import {Component, OnInit ,OnDestroy} from '@angular/core';
-import {ApiResponse, Category, Product, ProductService, Subcategory} from '../services/product.service';
+import { Product, ProductService} from '../services/product.service';
 import {CurrencyPipe, DecimalPipe} from '@angular/common';
 import {DescriptionPipe} from '../pipes/description.pipe';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
   import{RouterModule} from '@angular/router';
   import {Pagination} from '../../interfaces/pagination';
   import {FormsModule} from '@angular/forms';
@@ -24,25 +24,11 @@ import {Router} from '@angular/router';
 })
 export class ProductsComponent implements OnInit , OnDestroy {
     products: any[] = [];
-    allCategories: Category[] = [];
-    // allSubcategories: Record<string, { id: string, name: string }[]> = {};
-    allSubcategories: { [key: string]: Subcategory[] } = {};
+    categoryId: string | null = null;
+    subcategoryId: string | null = null;
 
-    // allCategories: string[] = ['laptops' ,'clothes' ,'mobile_phones'];
-    // allSubcategories: Record<string, string[]> ={
-    //   laptops:['Mac','Lenovo','msi','Asus','Acer','HP','Dell'],
-    //   clothes:['women' ,'man','shoes'],
-    //   mobile_phones:['infinix','Xiaomi','realme','oppo','SAMSUNG','Apple']
-    // };
-
-    selectedSubcategory: string |null = null;
-    selectedCategory: string| null = null;
-    categories: any[] = [];
-    subcategories: any = [];
-     searchValue: string = '';
+    searchValue: string = '';
     value: string = '';
-    categoryId: string = '';
-    subcategoryId: string = '';
     pagination: Pagination = {};
     private subscription: any;
     private page: number = 1;
@@ -50,24 +36,13 @@ export class ProductsComponent implements OnInit , OnDestroy {
     private search: string = '';
 
 
-    constructor(private productService: ProductService, private router: Router) {
+    constructor(private productService: ProductService, private router: Router ,private route:ActivatedRoute) {
     }
 
     loadProducts(): void {
-
-      // this.subscription = this.productService.getAllProducts(this.page, this.limit, 'category,name', this.search).subscribe({
-      //   next: (res) => {
-      //     this.products = res.data ;
-      //     this.pagination = res.pagination;
-      //   }
-     // / })
-
-
-
       this.productService.getAllProducts(this.page,this.limit,'category,name',this.search).subscribe({
         next: (res: any) => {
           console.log('Response from api :', res)
-
           this.products = res.data || res;
           this.products = Array.isArray(res) ? res : res.data;
           console.log('products', this.products);
@@ -80,61 +55,13 @@ export class ProductsComponent implements OnInit , OnDestroy {
       })
     }
 
-    // loadSubcategories(categoryId: string): void {
-    //   this.productService.getSubcategoriesByCategoryId(categoryId).subscribe({
-    //     next: (subcategories: Subcategory[]) => {
-
-          // if (Array.isArray(subcategories)) {
-          //   this.allSubcategories[categoryId] = subcategories;
-          // } else {
-          //   console.error('Expected subcategories to be an array');
-          // }
-        // },
-        // error: (err) => console.error('Error loading subcategories:', err),
-      // });
-    // }
 
 
-///////////////////
-
-    // loadCategories() {
-    //   this.productService.getAllCategories().subscribe({
-    //     next: (response:Category[]) => {
-    //       console.log(response); // افحص الاستجابة
-    //
-    //         this.allCategories = response;
-    //
-    //     },
-    //     error: (err) => console.error(err),
-    //   });
-    // }
-    /////////////////////////
-    //   onCategorySelect(event: Event): void {
-    //   const target = event.target as HTMLSelectElement;
-    //   const selectedValue = target.value;
-    //
-    //   if (selectedValue) {
-    //     this.selectedCategory = selectedValue;
-    //     this.loadSubcategories(selectedValue);
-    //   } else {
-    //     this.selectedCategory = null;
-    //     this.allSubcategories = {};
-    //   }
-    // }
-    /////////////////////////
-    // onSubcategorySelect(event: Event): void {
-    //   const target = event.target as HTMLSelectElement;
-    //   const selectedValue = target.value;
-    //
-    //   if (selectedValue) {
-    //     this.selectedSubcategory = selectedValue;
-    //   } else {
-    //     this.selectedSubcategory = null;
-    //   }
-    // }
+    //////////////////////
 
 
-  addToCart(productId: string): void{
+
+    addToCart(productId: string): void{
 
     //console.log(`product is added to${productId}`);
     this.productService.addProductToCart(productId).subscribe({
@@ -168,12 +95,13 @@ export class ProductsComponent implements OnInit , OnDestroy {
     this.loadProducts()
   }
 
-
-
   ngOnInit() {
     this.loadProducts()
-    // this.loadCategories()
-    // this.loadFilteredProducts('all','all');
+
+    this.route.queryParams.subscribe(params => {
+      this.categoryId = params['category'] || null;
+      this.subcategoryId = params['subcategory'] || null;
+    });
   }
   ngOnDestroy() {
     if (this.subscription) {

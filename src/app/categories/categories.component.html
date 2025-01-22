@@ -1,0 +1,19 @@
+
+<div class="categories-section" style="padding: 50px 0; background-color: #f9f9f9;">
+  <div class="container">
+    <h2 class="text-center mb-5" style="font-size: 2.5rem; color: #333;">Explore Our Categories</h2>
+    <div class="row">
+      @for (category of categories; track category._id) {
+        <div class="col-md-4 mb-4">
+          <div class="card text-center shadow-sm" style="border: none; border-radius: 15px; overflow: hidden; transition: transform 0.3s;">
+            <div class="card-body">
+              <img [src]="category.image" [alt]="category.name" style="width: 100px; height: 100px; object-fit: cover; border-radius: 50%;">
+              <h5 class="card-title mt-3">{{ category.name }}</h5>
+              <a [routerLink]="['/products']" [queryParams]="{ category: category._id }" class="btn btn-primary mt-2">View Products</a>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>

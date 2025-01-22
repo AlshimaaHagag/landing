@@ -1,1 +1,19 @@
-<p>subcategories works!</p>
+
+<div class="subcategories-section" style="padding: 50px 0; background-color: #fff;">
+  <div class="container">
+    <h2 class="text-center mb-5" style="font-size: 2.5rem; color: #333;">Discover Subcategories</h2>
+    <div class="row">
+      @for (subcategory of subcategories; track subcategory._id) {
+        <div class="col-md-4 mb-4">
+          <div class="card text-center shadow-sm" style="border: none; border-radius: 15px; overflow: hidden; transition: transform 0.3s;">
+            <div class="card-body">
+              <img [src]="subcategory.image" [alt]="subcategory.name" style="width: 100px; height: 100px; object-fit: cover; border-radius: 50%;">
+              <h5 class="card-title mt-3">{{ subcategory.name }}</h5>
+              <a [routerLink]="['/products']" [queryParams]="{ subcategory: subcategory._id }" class="btn btn-primary mt-2">View Products</a>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>

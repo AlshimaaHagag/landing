@@ -26,16 +26,27 @@ export const routes: Routes = [
         loadComponent: () => import('./product-details/product-details.component').then(c => c.ProductDetailsComponent)
       },
       {
-        path:'products/:categoryId',
-        title:'category',
-        loadComponent:() => import('./products/products.component').then(c=>c.ProductsComponent)
+        path:'categories',
+        title:'categories',
+        loadComponent:() => import('./categories/categories.component').then(c=>c.CategoriesComponent)
 
       },
       {
-        path:'products/:categoryId/:subcategoryId',
-        title:'subcategory',
-        loadComponent:() => import('./products/products.component').then(c => c.ProductsComponent)
-      }
+        path:'subcategories',
+        title:'subcategories',
+        loadComponent:() => import('./subcategories/subcategories.component').then(c => c.SubcategoriesComponent)
+      },
+      {
+        path: 'products/category/:categoryId',
+        title: 'Category Products',
+        loadComponent: () => import('./products/products.component').then((c) => c.ProductsComponent),
+      },
+      {
+        path: 'products/category/:categoryId/subcategory/:subcategoryId',
+        title: 'Subcategory Products',
+        loadComponent: () => import('./products/products.component').then((c) => c.ProductsComponent),
+      },
+
 
     ]
   },

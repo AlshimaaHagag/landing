@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class ApisService {
 
   readonly wishlistRoute:string ='/carts'
-  readonly apiUrl:string='http://localhost:3000';
+  readonly apiUrl:string ='http://localhost:3000';
   readonly reviewsRoute: string = '/api/v1/reviews';
   readonly productsRoute: string = '/api/v1/products';
   readonly categoryRoute: string = '/api/v1/categories';
